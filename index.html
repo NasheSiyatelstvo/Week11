@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 100px;
+        }
+        main {
+            display: grid;
+            grid-template-columnsg: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+
+        }
+
+        button {
+            grid-column-start: 2;
+            grid-row-start: 2;
+            border: double white 3px;
+            width: 150px;
+            height: 50px;
+            background-color: lightseagreen;
+            color: white;
+            font-weight: 600;
+            font-size: x-large;
+        }
+        button:hover {
+            background-color: darkblue;
+            color: yellow;
+            opacity: 0.3;
+            transform: scale(1.1);
+        }
+
+        input {
+            grid-column-start: 1;
+            grid-row-start: 2;
+            width: 180px;
+            height: 44px;
+            justify-self: end;
+            margin-right: 10px;
+        }
+
+        h1 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            justify-self: center;
+        }
+        
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <main>
+    <h1>ToDo List</h1>
+    <input type="text" id="taskInput" placeholder="Введите задачу">
+    <button id="addButton">Добавить</button>
+    <ul id="taskList"></ul>
+    </main>
+    <script>
+        
+        const taskInput = document.getElementById('taskInput');
+        const addButton = document.getElementById('addButton');
+        const taskList = document.getElementById('taskList');
+        
+        function createTask() {
+            const taskText = taskInput.value;
+                const newTask = document.createElement('li');
+                newTask.textContent = taskText;
+                taskList.append(newTask);
+                taskInput.value = '';
+        
+        }
+
+        function checkTask(evt) {
+            if (evt.target.tagName === 'LI') {
+                evt.target.classList.toggle('completed');
+            }
+        }
+
+        addButton.addEventListener('click', createTask);
+        taskList.addEventListener('click', checkTask);
+    </script>     
+</body>
+</html>
